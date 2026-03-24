@@ -1,3 +1,5 @@
+package InsuranceCompanyAutomation;
+
 /**
  * Thrown when command line arguments are invalid or incomplete.
  */
