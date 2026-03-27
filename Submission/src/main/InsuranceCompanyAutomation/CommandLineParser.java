@@ -42,6 +42,20 @@ public class CommandLineParser implements ICommandLineParser {
         letterFlag ? letterTemplate : null);
   }
 
+  public static String usageMessage(String errorDetail) {
+    return "Error: " + errorDetail + "\n\n" +
+        "Usage:\n" +
+        "  --email                        Generate email messages. Requires --email-template.\n" +
+        "  --email-template <path/to/file> A filename for the email template.\n" +
+        "  --letter                       Generate letters. Requires --letter-template.\n" +
+        "  --letter-template <path/to/file> A filename for the letter template.\n" +
+        "  --output-dir <path/to/folder>  The folder to store all generated files. Required.\n" +
+        "  --csv-file <path/to/file>      The CSV file to process. Required.\n\n" +
+        "Examples:\n" +
+        "  --email --email-template email-template.txt --output-dir emails --csv-file customer.csv\n" +
+        "  --letter --letter-template letter-template.txt --output-dir letters --csv-file customer.csv\n";
+  }
+
   private String getNextArg(String[] args, int i, String flag) throws InvalidArgumentException {
     if (i + 1 >= args.length || args[i + 1].startsWith("--")) {
       throw new InvalidArgumentException(flag + " requires a value but none was given.");
