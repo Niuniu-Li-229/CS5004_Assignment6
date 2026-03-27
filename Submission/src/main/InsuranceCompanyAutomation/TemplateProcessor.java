@@ -17,12 +17,12 @@ public class TemplateProcessor {
    * @return the template
    */
   public String load(String templatePath) throws TemplateException {
-     String template = "";
+     StringBuilder template = new StringBuilder();
     //Read the template file
     try(BufferedReader file = new BufferedReader(new FileReader(templatePath))){
       String line = file.readLine();
       while(line != null){
-          template = template + line + System.lineSeparator();
+          template.append(line).append(System.lineSeparator());
           line = file.readLine();
       }
     } catch (FileNotFoundException fnfe) {
@@ -30,7 +30,7 @@ public class TemplateProcessor {
     } catch (IOException ioe) {
       throw new TemplateException("Something else went wrong", ioe);
     }
-    return template;
+    return template.toString();
   }
 
 
@@ -41,17 +41,20 @@ public class TemplateProcessor {
    * @return template with the placeholders replaced by specific customers information
    */
   public String render(String template, Map<String, String> customer){
-      for(Map.Entry<String, String> entry : customer.entrySet()){
-        String key = entry.getKey();
-        String value = entry.getValue();
+    if(customer == null){
+      throw new IllegalArgumentException("Invalid Input");
+    }
+    for(Map.Entry<String, String> entry : customer.entrySet()){
+      String key = entry.getKey();
+      String value = entry.getValue();
 
-        if(value == null){
-          value = "";
-        }
-        String placeholder = "[[" + key + "]]";
-        template = template.replace(placeholder, value);
+      if(value == null){
+        value = "";
       }
-      return template;
+      String placeholder = "[[" + key + "]]";
+      template = template.replace(placeholder, value);
+    }
+    return template;
   }
 
 }
