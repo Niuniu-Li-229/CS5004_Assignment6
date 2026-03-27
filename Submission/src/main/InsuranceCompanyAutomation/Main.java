@@ -58,3 +58,4 @@ public class Main {
 
     System.out.println("Done! Files written to: " + config.getOutputDir());
   }
+}
