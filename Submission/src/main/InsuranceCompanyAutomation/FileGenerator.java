@@ -1,6 +1,7 @@
 package InsuranceCompanyAutomation;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -25,20 +26,19 @@ public class FileGenerator {
     // Load the template
     TemplateProcessor templateProcessor = new TemplateProcessor();
     String template = templateProcessor.load(templatePath);
-    String fileName = "";
+
       for(int i = 0; i < rows.size(); i++){
           Map<String, String> customer = rows.get(i);
           String templateForCustomer = templateProcessor.render(template, customer);
           String customerName = customer.get("last_name") + "_" + customer.get("first_name");
-          fileName = prefix + "_" + customerName;
+          String fileName = prefix + "_" + customerName + ".txt";
 
-          //Write the output template
-          try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){
-            String line = "";
-            //Write the file here
+          //Write the output template and store it to the outputDir path
+          try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputDir + File.separator +fileName))){
+            writer.write(templateForCustomer);
 
         } catch (IOException ioe) {
-            //Throw exception here
+            throw new TemplateException("Something went wrong", ioe);
         }
       }
   }
