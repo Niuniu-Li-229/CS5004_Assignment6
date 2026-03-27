@@ -1,3 +1,5 @@
+package InsuranceCompanyAutomation;
+
 public class CommandLineParser implements ICommandLineParser {
 
   @Override
