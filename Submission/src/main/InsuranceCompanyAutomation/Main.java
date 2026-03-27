@@ -10,7 +10,7 @@ import java.util.Map;
 public class Main {
 
   public static void main(String[] args) {
-    ICommandLineParser cmdParser = new CommandLineParser();
+    CommandLineParser cmdParser = new CommandLineParser();
     AppConfig config;
     try {
       config = cmdParser.parse(args);
@@ -20,7 +20,7 @@ public class Main {
       return;
     }
 
-    ICSVParser csvParser = new CSVParser();
+    CSVParser csvParser = new CSVParser();
     List<Map<String, String>> rows;
     try {
       rows = csvParser.parse(config.getCsvFilePath());
