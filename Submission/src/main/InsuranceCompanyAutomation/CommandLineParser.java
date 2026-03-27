@@ -1,8 +1,7 @@
 package InsuranceCompanyAutomation;
 
-public class CommandLineParser implements ICommandLineParser {
+public class CommandLineParser {
 
-  @Override
   public AppConfig parse(String[] args) throws InvalidArgumentException {
     String csvFile = null;
     String outputDir = null;
