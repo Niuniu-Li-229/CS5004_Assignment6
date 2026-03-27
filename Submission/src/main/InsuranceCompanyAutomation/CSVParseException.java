@@ -1,3 +1,5 @@
+package InsuranceCompanyAutomation;
+
 /**
  * Thrown when the CSV file cannot be read or parsed.
  */

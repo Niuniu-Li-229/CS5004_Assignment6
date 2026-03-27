@@ -1,3 +1,5 @@
+package InsuranceCompanyAutomation;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public interface IFileGenerator {
    * named consistently, e.g. email_1.txt, email_2.txt
    *
    * @param templatePath path to the template file
-   * @param rows         parsed CSV rows from ICSVParser
+   * @param rows         parsed CSV rows from InsuranceCompanyAutomation.ICSVParser
    * @param outputDir    directory to write output files into
    * @param prefix       filename prefix, e.g. "email" or "letter"
    * @throws TemplateException if processing fails for any row
