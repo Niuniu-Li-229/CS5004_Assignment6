@@ -7,9 +7,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CSVParser implements ICSVParser {
+public class CSVParser{
 
-  @Override
   public List<Map<String, String>> parse(String filePath) throws CSVParseException {
     List<Map<String, String>> rows = new ArrayList<>();
 
