@@ -1,5 +1,3 @@
-package InsuranceCompanyAutomation;
-
 public class CommandLineParser {
 
   public AppConfig parse(String[] args) throws InvalidArgumentException {

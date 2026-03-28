@@ -1,4 +1,4 @@
-package InsuranceCompanyAutomation;// --------
+// --------
 // SHARED DATA: InsuranceCompanyAutomation.AppConfig.java
 // Produced by Wanjing, consumed by Yuxi
 // --------
