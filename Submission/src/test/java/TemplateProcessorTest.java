@@ -1,5 +1,3 @@
-package InsuranceCompanyAutomation;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -8,25 +6,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 
-class TemplateProcessorTest {
+public class TemplateProcessorTest {
   private TemplateProcessor processor;
 
   @TempDir
   Path tempDir;
 
   @BeforeEach
-  void setUp() {
+  public void setUp() {
     processor = new TemplateProcessor();
   }
 
   @Test
-  void testLoad() throws TemplateException, IOException {
+  public void testLoad() throws TemplateException, IOException {
     Path templateFile = tempDir.resolve("template.txt");
     Files.writeString(templateFile, "Hello [[first_name]]\nxxxx");
 
@@ -36,7 +33,7 @@ class TemplateProcessorTest {
   }
 
   @Test
-  void testLoadFileNotFound() {
+  public void testLoadFileNotFound() {
     Path missingFile = tempDir.resolve("missing.txt");
     assertEquals(false, Files.exists(missingFile));
 
@@ -48,7 +45,7 @@ class TemplateProcessorTest {
   }
 
   @Test
-  void testRender(){
+  public void testRender(){
     String template = "Hello [[first_name]] [[last_name]], your email is [[email]]";
 
     Map<String, String> customer = new HashMap<>();
@@ -63,13 +60,13 @@ class TemplateProcessorTest {
 
 
   @Test
-  void testRenderWithInvalidInput() {
+  public void testRenderWithInvalidInput() {
     String template = "Hello [[first_name]] [[last_name]]";
     assertThrows(IllegalArgumentException.class,() -> processor.render(template, null));
   }
 
   @Test
-  void testRenderWithNullCustomerValue(){
+  public void testRenderWithNullCustomerValue(){
     String template = "Hello [[first_name]] [[last_name]]";
     Map<String, String> customer = new HashMap<>();
     customer.put("first_name", "John");
@@ -77,7 +74,14 @@ class TemplateProcessorTest {
     assertEquals("Hello John ", processor.render(template,customer));
   }
 
+  @Test
+  public void testRenderWithRepeatedPlaceholder() {
+    String template = "[[first_name]] says hi to [[first_name]]";
+    Map<String, String> customer = new HashMap<>();
+    customer.put("first_name", "John");
 
+    assertEquals("John says hi to John", processor.render(template, customer));
+  }
 
 
 }

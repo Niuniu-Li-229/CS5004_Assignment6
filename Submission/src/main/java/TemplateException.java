@@ -1,5 +1,3 @@
-package InsuranceCompanyAutomation;
-
 /**
  * Thrown when a template file cannot be read or a placeholder is unresolvable.
  */
