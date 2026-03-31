@@ -1,5 +1,14 @@
+/**
+ * This class is the parser for the command line.
+ */
 public class CommandLineParser {
 
+  /**
+   * Loop through the user input and pass the arguments to AppConfig accordingly
+   * @param args  user input for the arguments
+   * @return  valid AppConfig
+   * @throws InvalidArgumentException if the inputs are invalid
+   */
   public AppConfig parse(String[] args) throws InvalidArgumentException {
     String csvFile = null;
     String outputDir = null;
@@ -39,6 +48,11 @@ public class CommandLineParser {
         letterFlag ? letterTemplate : null);
   }
 
+  /**
+   * Builds a formatted error and usage message for display to the user.
+   * @param errorDetail the error message user encountered when running the program
+   * @return template input for users to follow
+   */
   public static String usageMessage(String errorDetail) {
     return "Error: " + errorDetail + "\n\n" +
         "Usage:\n" +
@@ -53,6 +67,14 @@ public class CommandLineParser {
         "  --letter --letter-template letter-template.txt --output-dir letters --csv-file customer.csv\n";
   }
 
+  /**
+   * Returns the value token that follows a flag, or throws if none is present.
+   * @param args  user input
+   * @param i ith part of the argument
+   * @param flag  flag for invalid input
+   * @return  ith element in the argument that can be passed as an input
+   * @throws InvalidArgumentException if invalid input
+   */
   private String getNextArg(String[] args, int i, String flag) throws InvalidArgumentException {
     if (i + 1 >= args.length || args[i + 1].startsWith("--")) {
       throw new InvalidArgumentException(flag + " requires a value but none was given.");
@@ -60,6 +82,16 @@ public class CommandLineParser {
     return args[i + 1];
   }
 
+  /**
+   * Validate the user's input, true if --email was provided
+   * @param csvFile csv file that have the customer info
+   * @param outputDir output directory that store the output
+   * @param emailFlag flag if use an email or not
+   * @param emailTemplate email template to use if using email
+   * @param letterFlag  flag if use a letter or not
+   * @param letterTemplate  letter template to use if using letter
+   * @throws InvalidArgumentException if the input is invalid
+   */
   private void validate(String csvFile, String outputDir, boolean emailFlag, String emailTemplate,
       boolean letterFlag, String letterTemplate) throws InvalidArgumentException {
 

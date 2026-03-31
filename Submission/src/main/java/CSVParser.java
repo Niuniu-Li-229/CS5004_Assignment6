@@ -6,8 +6,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This is the class serve as a parser for the csv file
+ */
 public class CSVParser{
 
+  /**
+   * Create a list of map that store the client's information
+   * @param filePath  the path of the csv file
+   * @return a list of maps, one per data row, where each key is a header name
+   * @throws CSVParseException  if invalid csv file
+   */
   public List<Map<String, String>> parse(String filePath) throws CSVParseException {
     List<Map<String, String>> rows = new ArrayList<>();
 
@@ -38,6 +47,11 @@ public class CSVParser{
     return rows;
   }
 
+  /**
+   * Create a list of String that store the info of the line
+   * @param line line contains the information
+   * @return ordered list of field values with surrounding double-quotes stripped
+   */
   List<String> parseLine(String line) {
     List<String> fields = new ArrayList<>();
     StringBuilder current = new StringBuilder();
